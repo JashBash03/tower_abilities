@@ -6,7 +6,6 @@ public class AbilityHolder : MonoBehaviour
 {
     [SerializeField] List<ClasePadre> abilities;
     int selectedAbilityIndex = 0;
-    Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
     void Update()
     {
