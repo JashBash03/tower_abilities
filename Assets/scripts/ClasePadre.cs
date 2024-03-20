@@ -7,5 +7,5 @@ public abstract class ClasePadre : MonoBehaviour
     [SerializeField] string abilityName;
     [SerializeField] float colldown;
 
-    public abstract void Trigger();
+    public abstract void Trigger(Vector3 direction);
 }

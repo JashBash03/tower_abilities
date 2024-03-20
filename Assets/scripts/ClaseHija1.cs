@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting.Antlr3.Runtime.Misc;
 using UnityEngine;
 
-public class Hija1 : ClasePadre
+public class ClaseHija1 : ClasePadre
 {
     [SerializeField] GameObject Bullets;
     [SerializeField] float speed;
@@ -11,25 +11,18 @@ public class Hija1 : ClasePadre
     [SerializeField] Transform spawnPoint;
 
 
-    public override void Trigger()
+    public override void Trigger(Vector3 direction)
     {
         print("pew");
-
-        Vector3 globalMousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        globalMousePos.z = 0f;
-        Vector3 aiming = (globalMousePos - spawnPoint.position).normalized;
 
         GameObject bulletInstance = GameObject.Instantiate
         (Bullets,
         spawnPoint.position,
         Quaternion.identity);
 
-        Rigidbody2D rbBala = bulletInstance.GetComponent<Rigidbody2D>();
+        LinearMovement linearMovementComponent = bulletInstance.GetComponent<LinearMovement>();
+        linearMovementComponent.BulletSpeedAndDirection(speed, direction);
 
-        if (Bullets != null)
-        {
-            rbBala.velocity = aiming * speed;
-        }
         Destroy(bulletInstance, 1f);
     }
 }

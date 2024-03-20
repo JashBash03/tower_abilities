@@ -20,8 +20,12 @@ public class AbilityHolder : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Alpha5))
             selectedAbilityIndex = 4;
 
+        Vector3 globalMousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        globalMousePos.z = 0f;
+        Vector3 direction = (globalMousePos - transform.position).normalized;
+
         if (Input.GetMouseButtonDown(0))
-            abilities[selectedAbilityIndex].Trigger();
+            abilities[selectedAbilityIndex].Trigger(direction);
 
     }
 }
