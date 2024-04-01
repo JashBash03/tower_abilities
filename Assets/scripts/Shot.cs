@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting.Antlr3.Runtime.Misc;
 using UnityEngine;
 
-public class Shot2 : ClasePadre
+public class Shot : ClasePadre
 {
     [SerializeField] GameObject Bullets;
     [SerializeField] float speed;

@@ -1,25 +1,39 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerHealth : MonoBehaviour
 {
-    [SerializeField] float maxHealth;
-    public float currentHealth;
+    [SerializeField] int startingHealth;
+    [SerializeField] int currentHealth;
+    [SerializeField] Image healthIndicator;
 
     void Start()
     {
-        currentHealth = maxHealth;
+        currentHealth = startingHealth;
     }
 
-    public void Hurt(int amount)
+    void UpdateHealthImage()
     {
-        currentHealth -= amount;
+        healthIndicator.fillAmount = (1.0f * currentHealth / startingHealth);
+    }
 
-        if (currentHealth <= 0)
+    public void Damage(int damage)
+    {
+
+        currentHealth -= damage;
+        UpdateHealthImage();
+        currentHealth = Mathf.Clamp(currentHealth, 0, startingHealth);
+
+        if (currentHealth == 0)
         {
-            currentHealth = 0;
             GameEvents.PlayerDied.Invoke();
         }
+    }
+    public void Heal(int damage)
+    {
+        currentHealth += damage;
+        currentHealth = Mathf.Clamp(currentHealth, 0, startingHealth);
     }
 }

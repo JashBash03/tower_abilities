@@ -4,33 +4,22 @@ using UnityEngine;
 
 public class EnemySpawn : MonoBehaviour
 {
-    [SerializeField] GameObject prefab;
-    Transform Player;
-    bool gameOver = false;
-    [SerializeField] Transform playerTransform;
-    float speed;
-
+    [SerializeField] GameObject prefabEnemy;
+    [SerializeField] List<Transform> spawnPoints;
+    [SerializeField] Transform enemy;
     void Start()
     {
-        GameEvents.EnemySpawn.AddListener(Spawn);
-        GameEvents.EnemySpawn.Invoke();
-        GameEvents.EnemySpawn.Invoke();
-        GameEvents.PlayerDied.AddListener(OnPlayerDeath);
+        StartCoroutine(enemySpawner());
+        print("spaaaa");
     }
-
-    void OnPlayerDeath()
+    IEnumerator enemySpawner()
     {
-        gameOver = true;
-        Vector3 directionToPlayer = Vector3.zero;
-        directionToPlayer = playerTransform.position - transform.position;
-        directionToPlayer = directionToPlayer.normalized;
-        transform.position = directionToPlayer * speed * Time.deltaTime;
-    }
+        while (true)
+        {
+            Vector3 enemySpawn = spawnPoints[(Random.Range(0, spawnPoints.Count))].position;
+            GameObject.Instantiate(prefabEnemy, enemySpawn, Quaternion.identity);
 
-    void Spawn()
-    {
-        if (gameOver)
-            return;
-        GameObject.Instantiate(prefab, new Vector3(Random.Range(-20f, 20f), Random.Range(-20f, 20f), 0), Quaternion.identity);
+            yield return new WaitForSeconds(4f);
+        }
     }
 }
