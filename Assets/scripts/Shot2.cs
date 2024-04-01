@@ -3,13 +3,12 @@ using System.Collections.Generic;
 using Unity.VisualScripting.Antlr3.Runtime.Misc;
 using UnityEngine;
 
-public class ClaseHija1 : ClasePadre
+public class Shot2 : ClasePadre
 {
     [SerializeField] GameObject Bullets;
     [SerializeField] float speed;
     [SerializeField] float strenght;
     [SerializeField] Transform spawnPoint;
-
 
     public override void Trigger(Vector3 direction)
     {
