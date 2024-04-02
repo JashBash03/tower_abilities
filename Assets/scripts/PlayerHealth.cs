@@ -14,7 +14,7 @@ public class PlayerHealth : MonoBehaviour
         currentHealth = startingHealth;
     }
 
-    void UpdateHealthImage()
+    public void UpdateHealthImage()
     {
         healthIndicator.fillAmount = (1.0f * currentHealth / startingHealth);
     }

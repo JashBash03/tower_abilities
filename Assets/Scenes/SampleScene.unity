@@ -432,8 +432,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2122400201}
   - component: {fileID: 2122400204}
-  - component: {fileID: 2122400208}
-  - component: {fileID: 2122400207}
   - component: {fileID: 2122400205}
   - component: {fileID: 2122400200}
   - component: {fileID: 2122400209}
@@ -527,8 +525,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   abilities:
   - {fileID: 2122400210}
-  - {fileID: 2122400208}
-  - {fileID: 2122400207}
 --- !u!114 &2122400205
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -541,32 +537,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b43992194b66b674ba40cd9e30f62ecc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &2122400207
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2122400199}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 08d060b7b63e01e4596ddc393de29dd8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  abilityName: 
---- !u!114 &2122400208
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2122400199}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6bbb8e38401132f4e866b3e01c10d4bd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  abilityName: 
 --- !u!114 &2122400209
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -579,7 +549,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bea86918e20253b45a7400ff62f77e25, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startingHealth: 0
+  startingHealth: 10
   currentHealth: 0
   healthIndicator: {fileID: 0}
 --- !u!114 &2122400210
@@ -597,7 +567,8 @@ MonoBehaviour:
   abilityName: Bullet
   Bullets: {fileID: 7876850588594340393, guid: af12a5f1104718946818d2392e62bb81, type: 3}
   speed: 10
-  strenght: 0
+  Spawn:
+  - {fileID: 1361642123}
   spawnPoint: {fileID: 1361642123}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:

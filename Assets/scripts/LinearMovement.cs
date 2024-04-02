@@ -4,13 +4,27 @@ using UnityEngine;
 
 public class LinearMovement : MonoBehaviour
 {
-    
-    Rigidbody2D rbBala;
+    float speed = 15;
+    [SerializeField] float playerBulletDamage;
 
-    public void BulletSpeedAndDirection(float speed, Vector3 direction)
+    public void Shoot(Vector3 direction)
     {
-        print(direction);
-        rbBala = GetComponent<Rigidbody2D>();
+        Rigidbody2D rbBala = gameObject.GetComponent<Rigidbody2D>();
+
         rbBala.velocity = direction * speed;
+    }
+    public void bulletShoot(Vector3 directionToMouse, float speed)
+    {
+        Rigidbody2D rb = gameObject.GetComponent<Rigidbody2D>();
+        rb.velocity = directionToMouse * speed;
+    }
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Enemy"))
+        {
+            EnemyHealth enemyHealth = collision.gameObject.GetComponent<EnemyHealth>();
+            enemyHealth.Hurt(playerBulletDamage);
+            Destroy(gameObject);
+        }
     }
 }

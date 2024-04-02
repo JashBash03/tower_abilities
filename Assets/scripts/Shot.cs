@@ -7,21 +7,24 @@ public class Shot : ClasePadre
 {
     [SerializeField] GameObject Bullets;
     [SerializeField] float speed;
-    [SerializeField] float strenght;
+    [SerializeField] List<Transform> Spawn;
     [SerializeField] Transform spawnPoint;
 
     public override void Trigger(Vector3 direction)
     {
-        print("pew");
+        for (int i = 0; i < Spawn.Count; i++)
+        {
+            GameObject bulletInstance = GameObject.Instantiate
+            (Bullets,
+            Spawn[i].position,
+            Quaternion.identity
+            );
+            LinearMovement lm = bulletInstance.GetComponent<LinearMovement>();
+            lm.bulletShoot(direction, speed);
+            Destroy(bulletInstance, 1f);
 
-        GameObject bulletInstance = GameObject.Instantiate
-        (Bullets,
-        spawnPoint.position,
-        Quaternion.identity);
+            lm.Shoot(direction);
 
-        LinearMovement linearMovementComponent = bulletInstance.GetComponent<LinearMovement>();
-        linearMovementComponent.BulletSpeedAndDirection(speed, direction);
-
-        Destroy(bulletInstance, 1f);
+        }
     }
 }
