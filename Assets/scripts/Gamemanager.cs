@@ -6,31 +6,28 @@ using UnityEngine.SceneManagement;
 
 public class Gamemanager : MonoBehaviour
 {
-    [SerializeField] GameObject gameOverCanvas;
+    [SerializeField] GameObject gameOverUI;
+
     void Start()
     {
-        gameOverCanvas.SetActive(false);
+        gameOverUI.SetActive(false);
         GameEvents.PlayerDied.AddListener(GameOver);
     }
-    void GameOver()
-    {
-        gameOverCanvas.SetActive(true);
-        StartCoroutine(DelayedReset());
-    }
 
-    IEnumerator DelayedReset()
-    {
-        yield return new WaitForSeconds(5f);
-        Reset();
-    }
     void Update()
     {
-        if (Input.GetKeyUp(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.R))
         {
-            Reset();
+            RestartGame();
         }
     }
-    void Reset()
+
+    void GameOver()
+    {
+        gameOverUI.SetActive(true);
+    }
+
+    void RestartGame()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }

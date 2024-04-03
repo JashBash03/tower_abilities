@@ -5,27 +5,71 @@ using UnityEngine.UI;
 
 public class EnemyHealth : MonoBehaviour
 {
-    int currentHealth = 10;
-    int startingHealth = 10;
-    [SerializeField] Image health;
+    [SerializeField] int startingHealth = 10;
+    int currentHealth;
+    [HideInInspector] public bool gameOver = false;
+    [SerializeField] SpriteRenderer health;
 
-    private void Start()
+    Color fullHealthColor = Color.green;
+    Color zeroHealthColor = Color.red;
+
+    void Start()
     {
         currentHealth = startingHealth;
+        UpdateHealthColor();
     }
-    public void Hurt(float amount)
+
+    void UpdateHealthColor()
+    {
+        float healthPercentage = (float)currentHealth / startingHealth;
+        health.color = Color.Lerp(zeroHealthColor, fullHealthColor, healthPercentage);
+    }
+    public void Damage(float amount)
     {
         currentHealth -= (int)amount;
-        UpdateHealthImage();
+        currentHealth = Mathf.Clamp(currentHealth, 0, startingHealth);
+        
         if (currentHealth <= 0)
         {
             Destroy(gameObject);
-            print("Enemigo muerto, abondo pa mi huerto");
+            print("Enemigo muerto");
+        }
+
+        UpdateHealthColor();
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("Bullet"))
+        {
+            LinearMovement bullet = other.GetComponent<LinearMovement>();
+            if (bullet != null)
+            {
+                Damage(2);
+                Destroy(other.gameObject);
+            }
+        }
+        if (other.CompareTag("BigBullet"))
+        {
+            LinearMovement bullet = other.GetComponent<LinearMovement>();
+            if (bullet != null)
+            {
+                Damage(5);
+                Destroy(other.gameObject);
+            }
         }
     }
 
-    void UpdateHealthImage()
+    private void OnCollisionEnter2D(Collision2D collision)
     {
-        health.fillAmount = (1.0f * currentHealth / startingHealth);
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            PlayerHealth playerHealth = collision.gameObject.GetComponent<PlayerHealth>();
+            if (playerHealth != null)
+            {
+                playerHealth.Damage(2);
+                Destroy(gameObject);
+            }
+        }
     }
 }

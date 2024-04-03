@@ -6,5 +6,5 @@ using UnityEngine.Events;
 public class GameEvents : MonoBehaviour
 {
     public static UnityEvent PlayerDied = new UnityEvent();
-    public static UnityEvent<int> HealPlayer = new UnityEvent<int>();
+    public static UnityEvent EnemyDied = new UnityEvent();
 }

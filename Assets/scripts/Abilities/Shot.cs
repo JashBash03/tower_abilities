@@ -14,17 +14,14 @@ public class Shot : ClasePadre
     {
         for (int i = 0; i < Spawn.Count; i++)
         {
-            GameObject bulletInstance = GameObject.Instantiate
-            (Bullets,
-            Spawn[i].position,
-            Quaternion.identity
+            GameObject projectileInstance = Instantiate(
+                Bullets,
+                Spawn[i].position,
+                Quaternion.identity
             );
-            LinearMovement lm = bulletInstance.GetComponent<LinearMovement>();
-            lm.bulletShoot(direction, speed);
-            Destroy(bulletInstance, 1f);
-
-            lm.Shoot(direction);
-
+            LinearMovement linearMovementComponent = projectileInstance.GetComponent<LinearMovement>();
+            linearMovementComponent.SetSpeedAndDirection(speed, direction);
+            Destroy(projectileInstance, 0.9f);
         }
     }
 }
