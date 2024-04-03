@@ -4,9 +4,17 @@ using UnityEngine;
 
 public class AbilityHolder : MonoBehaviour
 {
-    [SerializeField] List<ClasePadre> abilities;
+    [SerializeField] List<Ability> abilities;
     int selectedAbilityIndex = 0;
 
+
+    void Start()
+    {
+        for (int i = 0; i < abilities.Count; i++)
+        {
+            abilities[i].PlayerTransform(transform);
+        }
+    }
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Alpha1))
@@ -26,6 +34,5 @@ public class AbilityHolder : MonoBehaviour
 
         if (Input.GetMouseButtonDown(0))
             abilities[selectedAbilityIndex].Trigger(direction);
-
     }
 }
